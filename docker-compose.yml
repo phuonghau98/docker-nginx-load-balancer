@@ -1,0 +1,26 @@
+version: '3.2'
+services:
+  backend1:
+    build: ./backend
+    tty: true
+    volumes:
+      - './backend/:/user/src/awesomeapp'
+  backend2:
+    build: ./backend
+    tty: true
+    volumes:
+      - './backend/:/user/src/awesomeapp'
+  backend3:
+    build: ./backend
+    tty: true
+    volumes:
+      - './backend/:/user/src/awesomeapp'
+  loadbalancer:
+    build: ./load-balancer
+    tty: true
+    links:
+      - backend1
+      - backend2
+      - backend3
+    ports:
+      - '8080:8080'
